@@ -12,13 +12,13 @@ export default function Sidebar() {
                 <nav>
                     <ul>
                         <li>
-                            <NavLink to="/users" className="nav-item">Users</NavLink>
+                            <NavLink to="/react-dashboard/users" className="nav-item">Users</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/settings" className="nav-item">Settings</NavLink>
+                            <NavLink to="/react-dashboard/settings" className="nav-item">Settings</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/reports" className="nav-item">Reports</NavLink>
+                            <NavLink to="/react-dashboard/reports" className="nav-item">Reports</NavLink>
                         </li>
                     </ul>
                 </nav>
