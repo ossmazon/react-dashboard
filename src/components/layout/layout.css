@@ -1,0 +1,93 @@
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-surface);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-right: 1px solid #333;
+}
+
+.sidebar-title {
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 16px;
+}
+
+.sidebar a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: var(--accent)
+}
+
+.layout {
+    display: flex;
+
+}
+
+.content-wrapper {
+    margin-left: var(--sidebar-width);
+    width: 100%
+}
+
+.topbar {
+    height: 60px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.theme-btn {
+    background: transparent;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.theme-btn:hover {
+    border-color: var(--accent);
+}
+
+.content {
+    padding: 20px;
+    min-height: calc(100vh -60px);
+    background: var(--bg-main)
+}
+
+.nav-item {
+    display: block;
+    padding: 10px 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.2s ease, background 0.2s ease;
+
+}
+
+.nav-item:hover {
+    color: var(--text-primary)
+}
+
+.nav-item.active {
+    color: var(--accent);
+    font-weight: 600;
+    border-left: 3px solid var(--accent);
+    padding-left: 12px;
+}

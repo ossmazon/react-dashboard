@@ -1,0 +1,88 @@
+.add-user-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 999;
+    display: flex;
+}
+
+.add-user-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px;
+    height: 100vh;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%);
+    transition: transfrom 0.3s ease;
+    z-index: 1000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-user-drawer.open {
+    transform: translate(0);
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.drawer-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.drawer-close-btn:hover {
+    color: var(--accent)
+}
+
+.drawer-body {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.form-group input {
+    padding:10px;
+    border-radius: 6px;
+    border: 1px solid #555;
+    background: var(--bg-main);
+    color: var(--text-primary);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    background: var(--accent);
+    color:white;
+    font-size:16px;
+    cursor: pointer;
+    margin-top:20px;
+    font-weight:900;
+}

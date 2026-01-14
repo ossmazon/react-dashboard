@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.ag-theme-alpine {
+  --ag-background-color: var(--bg-surface);
+  --ag-header-background-color: #333;
+
+  --ag-odd-row-background-color: #252525;
+  --ag-even-row-background-color: #2b2b2b;
+
+  --ag-font-size: 14px;
+  --ag-border-color: #444;
+
+  --ag-header-foreground-color: #ffffff;
+  --ag-foreground-color: #e5e5e5;
+}
+
+.ag-theme-alpine .ag-header {
+  background-color: #333 !important;
+  color: #fff !important;
+}
+
+:root {
+  --bg-main: #121212;
+  --bg-surface: #1e1e1e;
+  --text-primary: #f5f5f5;
+  --text-secondary: #bdbdbd;
+  --accent: #4fc3f7;
+  --sidebar-width: 240px;
+}
+
+:root.light {
+  --bg-main: #f4f4f4;
+  --bg-surface: #ffffff;
+  --text-primary: #111;
+  --text-secondary: #444;
+  --accent: #007acc;
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-primary);
+  font-family: sans-serif;
+}
+
+.page-wrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.add-user-btn {
+    background: transparent;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add-user-btn:hover {
+    border-color: var(--accent);
+}
