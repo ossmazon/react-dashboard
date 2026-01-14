@@ -8,10 +8,10 @@ export default function AppRoutes() {
     return (
         <>
             <Routes>
-                <Route path="/react-dashboard/" element={<Navigate to="/react-dashboard/users" />} />
-                <Route path="/react-dashboard/users" element={<UserPage />} />
-                <Route path="/react-dashboard/settings" element={<SettingsPage />} />
-                <Route path="/react-dashboard/reports" element={<ReportsPage />} />
+                <Route path="/" element={<Navigate to="/users" />} />
+                <Route path="/users" element={<UserPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/reports" element={<ReportsPage />} />
             </Routes>
         </>
     )
