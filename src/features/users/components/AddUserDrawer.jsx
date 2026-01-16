@@ -1,10 +1,13 @@
 import "./AddUserDrawer.css"
 import { useState } from "react"
+import { createUserRequest } from "../../../store/users/user.slice"
+import { useDispatch } from "react-redux"
 
 export default function AddUserDrawer({
     isOpen,
     onClose,
 }) {
+    const dispatch = useDispatch()
 
     const [formData, setFormData] = useState({
         name: "",
@@ -22,9 +25,17 @@ export default function AddUserDrawer({
 
         e.preventDefault()
 
+        dispatch(createUserRequest(formData))
+
         onClose()
 
         console.log("submited new user", e, formData)
+
+        setFormData({
+            name: "",
+            email: "",
+            phone: ""
+        })
     }
 
     return (
@@ -53,7 +64,7 @@ export default function AddUserDrawer({
                                                     type={field.type}
                                                     name={field.name}
                                                     value={formData[field.name]}
-                                                    onChange={(e)=>setFormData({...formData,[field.name]:e.target.value})}
+                                                    onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
                                                 />
                                             </div>
                                         ))

@@ -12,7 +12,8 @@ export default function UserTable({
             field: "id",
             sortable: true,
             filter: true,
-            flex: "1"
+            flex: "1",
+            valueFormatter: (params) => params.value?.toString()
         },
         {
             headerName: "Name",
