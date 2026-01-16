@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "../../store/users/user.slice";
+import { fetchUsersRequest } from "../../store/users/user.slice";
 import UserTable from "./components/UserTable";
 import AddUserDrawer from "./components/AddUserDrawer";
 
@@ -10,7 +10,7 @@ export default function UserPage() {
     const { list, loading, error } = useSelector((state) => state.users)
     const [showAddModal, setShowAddModal] = useState(false)
     useEffect(() => {
-        dispatch(fetchUsers())
+        dispatch(fetchUsersRequest())
     }, [])
 
     if (loading) {
@@ -25,7 +25,7 @@ export default function UserPage() {
 
     const closeDrawer = () => {
         setShowAddModal(false)
-    } 
+    }
 
     return (
         <>
@@ -37,7 +37,6 @@ export default function UserPage() {
                 {showAddModal && (
                     <>
                         <AddUserDrawer isOpen={showAddModal}
-                            //handleModal={handleModal}
                             onClose={closeDrawer}
                         />
                     </>

@@ -9,15 +9,24 @@ const userSlice = createSlice({
     name: "users",
     initialState,
     reducers: {
-        fetchUsers: (state) => {
+        fetchUsersRequest: (state) => {
             state.loading = true
         },
-        fetchUserSuccess: (state, action) => {
+        fetchUsersSuccess: (state, action) => {
             state.loading = false
             state.list = action.payload
         },
-        fetchUserFailure: (state, action) => {
+        fetchUsersFailure: (state, action) => {
             state.loading = false
+            state.error = action.payload
+        },
+        createUserRequest: (state, action) => {
+
+        },
+        createUserSuccess: (state, action) => {
+            state.list.push(action.payload)
+        },
+        createUserFailure: (state, action) => {
             state.error = action.payload
         }
 
@@ -25,9 +34,14 @@ const userSlice = createSlice({
 })
 
 export const {
-    fetchUsers,
-    fetchUserSuccess,
-    fetchUserFailure
+
+    fetchUsersRequest,
+    fetchUsersSuccess,
+    fetchUsersFailure,
+
+    createUserRequest,
+    createUserSuccess,
+    createUserFailure
 } = userSlice.actions
 
 export default userSlice.reducer
