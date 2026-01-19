@@ -5,9 +5,23 @@ const initialState = {
     loading: false,
     error: null
 }
+
+const loadUsersFromStorage = () => {
+    const saved = localStorage.getItem("users")
+    return saved ? JSON.parse(saved) : null
+}
+
+const savedUsersToStorage = (users) => {
+    localStorage.setItem("users", JSON.stringify(users))
+}
+
 const userSlice = createSlice({
     name: "users",
-    initialState,
+    initialState: {
+        list: loadUsersFromStorage() || [],
+        loading: false,
+        error: null
+    },
     reducers: {
         fetchUsersRequest: (state) => {
             state.loading = true
@@ -15,6 +29,7 @@ const userSlice = createSlice({
         fetchUsersSuccess: (state, action) => {
             state.loading = false
             state.list = action.payload
+            savedUsersToStorage(state.list)
         },
         fetchUsersFailure: (state, action) => {
             state.loading = false
@@ -25,6 +40,7 @@ const userSlice = createSlice({
         },
         createUserSuccess: (state, action) => {
             state.list.push(action.payload)
+            savedUsersToStorage(state.list)
         },
         createUserFailure: (state, action) => {
             state.error = action.payload
