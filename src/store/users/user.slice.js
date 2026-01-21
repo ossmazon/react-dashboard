@@ -44,8 +44,18 @@ const userSlice = createSlice({
         },
         createUserFailure: (state, action) => {
             state.error = action.payload
-        }
+        },
+        deleteUserRequest: (state, action) => {
+        },
+        deleteUserSuccess: (state, action) => {
+            const userId = action.payload
+            state.list = state.list.filter(user => user.id !== userId)
 
+            localStorage.setItem("users", JSON.stringify(state.list))
+        },
+        deleteUserFailure: (state, action) => {
+            state.error = action.payload
+        }
     }
 })
 
@@ -57,7 +67,12 @@ export const {
 
     createUserRequest,
     createUserSuccess,
-    createUserFailure
+    createUserFailure,
+
+    deleteUserRequest,
+    deleteUserSuccess,
+    deleteUserFailure,
+
 } = userSlice.actions
 
 export default userSlice.reducer

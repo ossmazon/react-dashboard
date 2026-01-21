@@ -29,8 +29,6 @@ export default function AddUserDrawer({
 
         onClose()
 
-        console.log("submited new user", e, formData)
-
         setFormData({
             name: "",
             email: "",

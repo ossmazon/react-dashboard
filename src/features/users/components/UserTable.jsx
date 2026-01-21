@@ -1,9 +1,18 @@
 import { AgGridReact } from "ag-grid-react";
 import { useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { deleteUserRequest } from "../../../store/users/user.slice";
+import "./UserTable.css"
 
 export default function UserTable({
     data
 }) {
+
+    const dispatch = useDispatch()
+
+    const deleteUser = (id) => {
+        dispatch(deleteUserRequest(id))
+    }
 
     const columnDefs = useMemo(() => [
 
@@ -36,6 +45,22 @@ export default function UserTable({
             filter: true,
             flex: "1"
 
+        },
+        {
+            headerName: "Actions",
+            field: "action",
+            flex: "1",
+            cellRenderer: (params) => {
+                return (
+
+                    <button
+                        className="delete-btn"
+                        onClick={() => params.context.deleteUser(params.data.id)}
+                    >
+                        Delete
+                    </button>
+                )
+            }
         }
     ], [])
     return (
@@ -49,6 +74,7 @@ export default function UserTable({
                     columnDefs={columnDefs}
                     pagination={true}
                     paginationPageSize={15}
+                    context={{ deleteUser }}
                 />
             </div>
         </>
