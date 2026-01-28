@@ -1,8 +1,9 @@
 import { AgGridReact } from "ag-grid-react";
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteUserRequest } from "../../../store/users/user.slice";
 import "./UserTable.css"
+import AddUserDrawer from "./AddUserDrawer";
 
 export default function UserTable({
     data
@@ -10,6 +11,19 @@ export default function UserTable({
 
     const dispatch = useDispatch()
 
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+    const [userToEdit, setUserToEdit] = useState(null)
+
+    const openEditDrawer = useCallback((user) => {
+        setUserToEdit(user)
+        setIsDrawerOpen(true)
+    }, [])
+
+    const closeDrawer = () => {
+        setIsDrawerOpen(false)
+        setUserToEdit(null)
+    }
     const deleteUser = (id) => {
         dispatch(deleteUserRequest(id))
     }
@@ -47,22 +61,38 @@ export default function UserTable({
 
         },
         {
-            headerName: "Actions",
-            field: "action",
+            headerName: "Update",
+            field: "update",
+            flex: "1",
+            cellRenderer: (params) => {
+                return (
+                    <button
+                        className="update-btn"
+                        onClick={() => openEditDrawer(params.data)}
+                    >
+                        Update
+                    </button>
+                )
+            }
+        },
+        {
+            headerName: "Delete",
+            field: "delete",
             flex: "1",
             cellRenderer: (params) => {
                 return (
 
                     <button
                         className="delete-btn"
-                        onClick={() => params.context.deleteUser(params.data.id)}
+                        onClick={() => deleteUser(params.data.id)}
                     >
                         Delete
                     </button>
                 )
             }
         }
-    ], [])
+    ], [openEditDrawer])
+
     return (
         <>
             <div className="ag-theme-alpine" style={{
@@ -74,9 +104,13 @@ export default function UserTable({
                     columnDefs={columnDefs}
                     pagination={true}
                     paginationPageSize={15}
-                    context={{ deleteUser }}
                 />
             </div>
+            <AddUserDrawer
+                isOpen={isDrawerOpen}
+                onClose={closeDrawer}
+                userToEdit={userToEdit}
+            />
         </>
     )
 }

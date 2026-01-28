@@ -1,19 +1,22 @@
 import "./AddUserDrawer.css"
-import { useState } from "react"
-import { createUserRequest } from "../../../store/users/user.slice"
+import { useEffect, useState } from "react"
+import { createUserRequest, updateUserRequest } from "../../../store/users/user.slice"
 import { useDispatch } from "react-redux"
 
 export default function AddUserDrawer({
     isOpen,
     onClose,
+    userToEdit,
 }) {
     const dispatch = useDispatch()
 
-    const [formData, setFormData] = useState({
+    const initialFormData = {
         name: "",
         email: "",
         phone: ""
-    })
+    }
+
+    const [formData, setFormData] = useState(initialFormData)
 
     const fields = [
         { label: "Name", name: "name", type: "text" },
@@ -21,19 +24,35 @@ export default function AddUserDrawer({
         { label: "Phone", name: "phone", type: "text" }
     ]
 
+    useEffect(() => {
+        if (userToEdit) {
+            setFormData(userToEdit)
+        } else {
+            setFormData(initialFormData)
+        }
+    }, [userToEdit])
+
+    const isEditting = Boolean(userToEdit)
+
     const handleSubmit = (e) => {
 
         e.preventDefault()
 
-        dispatch(createUserRequest(formData))
+        if (isEditting) {
+            dispatch(updateUserRequest(formData))
+        } else {
+            dispatch(createUserRequest(formData))
+        }
 
         onClose()
 
-        setFormData({
-            name: "",
-            email: "",
-            phone: ""
-        })
+        if (!isEditting) {
+            setFormData({
+                name: "",
+                email: "",
+                phone: ""
+            })
+        }
     }
 
     return (
@@ -45,7 +64,7 @@ export default function AddUserDrawer({
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className="drawer-header">
-                                <h2> Add user</h2>
+                                <h2> {isEditting ? "Edit User" : "Add New User"}</h2>
                                 <button className="drawer-close-btn"
                                     onClick={onClose}
                                 >X</button>
@@ -67,7 +86,7 @@ export default function AddUserDrawer({
                                             </div>
                                         ))
                                     }
-                                    <button className="submit-btn">Create User</button>
+                                    <button className="submit-btn">{isEditting ? "Update User" : "Create User"}</button>
                                 </form>
                             </div>
                         </div>

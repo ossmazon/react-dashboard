@@ -55,7 +55,22 @@ const userSlice = createSlice({
         },
         deleteUserFailure: (state, action) => {
             state.error = action.payload
+        },
+        updateUserRequest: (state, action) => {
+        },
+        updateUserSuccess: (state, action) => {
+            const updateUser = action.payload
+            const userIndex = state.list.findIndex(user => user.id === updateUser.id)
+
+            if (userIndex > -1) {
+                state.list[userIndex] = updateUser
+                savedUsersToStorage(state.list)
+            }
+        },
+        updateUserFailure: (state, action) => {
+            state.error = action.payload
         }
+
     }
 })
 
@@ -72,6 +87,10 @@ export const {
     deleteUserRequest,
     deleteUserSuccess,
     deleteUserFailure,
+
+    updateUserRequest,
+    updateUserSuccess,
+    updateUserFailure
 
 } = userSlice.actions
 

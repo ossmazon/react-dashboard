@@ -11,3 +11,16 @@
 .delete-btn:hover {
     background: #c9302c
 }
+
+.update-btn {
+    background: #007acc;;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+.update-btn:hover {
+    background: #074975;
+}
