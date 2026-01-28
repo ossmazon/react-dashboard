@@ -10,7 +10,11 @@ import {
 
     deleteUserRequest,
     deleteUserSuccess,
-    deleteUserFailure
+    deleteUserFailure,
+
+    updateUserRequest,
+    updateUserSuccess,
+    updateUserFailure
 } from "./user.slice"
 import { getUsersApi } from "./user.api";
 import { v4 as uuidv4 } from "uuid"
@@ -57,8 +61,19 @@ function* handleDeleteUser(action) {
     }
 }
 
+function* handleUpdateUser(action) {
+    try {
+        const updateUser = action.payload
+        yield delay(300)
+        yield put(updateUserSuccess(updateUser))
+    } catch (error) {
+        yield put(updateUserFailure("Faile to update user"))
+    }
+}
+
 export default function* usersSaga() {
     yield takeLatest(fetchUsersRequest.type, onFetchUsers)
     yield takeLatest(createUserRequest.type, handleCreateUser)
     yield takeLatest(deleteUserRequest.type, handleDeleteUser)
+    yield takeLatest(updateUserRequest.type, handleUpdateUser)
 }
