@@ -16,9 +16,6 @@ export default function UserPage() {
     if (loading) {
         return <p>Loading...</p>
     }
-    if (error) {
-        return <p style={{ color: "red" }}>Error: {error}</p>
-    }
     const openDrawer = () => {
         setShowAddModal(true)
     }

@@ -84,7 +84,7 @@ export default function UserTable({
 
                     <button
                         className="delete-btn"
-                        onClick={() => deleteUser(params.data.id)}
+                        onClick={() => deleteUser(params.data)}
                     >
                         Delete
                     </button>
