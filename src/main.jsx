@@ -8,6 +8,7 @@ import store from "./store/store.js"
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { ModuleRegistry, AllCommunityModule } from "ag-grid-community"
 import { ThemeProvider } from "./context/ThemeContext.jsx"
+import { ToastContainer } from "react-toastify"
 ModuleRegistry.registerModules([AllCommunityModule])
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -15,6 +16,18 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <HashRouter>
         <ThemeProvider>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLost
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
           <App />
         </ThemeProvider>
       </HashRouter>

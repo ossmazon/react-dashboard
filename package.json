@@ -19,6 +19,7 @@
     "react-dom": "^19.2.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.6",
+    "react-toastify": "^11.0.5",
     "redux-saga": "^1.4.2",
     "uuid": "^13.0.0"
   },

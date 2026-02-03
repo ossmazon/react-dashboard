@@ -1,4 +1,4 @@
-import { call, put, takeLatest, delay, select } from "redux-saga/effects";
+import { call, put, takeLatest, delay } from "redux-saga/effects";
 import {
     fetchUsersRequest,
     fetchUsersSuccess,
@@ -18,6 +18,7 @@ import {
 } from "./user.slice"
 import { getUsersApi } from "./user.api";
 import { v4 as uuidv4 } from "uuid"
+import { toast } from "react-toastify";
 
 function* onFetchUsers() {
     try {
@@ -31,8 +32,10 @@ function* onFetchUsers() {
 
         const response = yield call(getUsersApi)
         yield put(fetchUsersSuccess(response.data))
+        toast.success("Success loading users")
     } catch (error) {
         yield put(fetchUsersFailure(error.message))
+        toast.error("Error loading users")
     }
 }
 
@@ -46,18 +49,22 @@ function* handleCreateUser(action) {
             ...action.payload
         }
         yield put(createUserSuccess(newUser))
+        toast.success(`User ${action.payload.name} created successfully`)
     } catch (error) {
         yield put(createUserFailure("Failed to create user"))
+        toast.error("Failed to create user")
     }
 }
 
 function* handleDeleteUser(action) {
     try {
-        const userId = action.payload
+        const userId = action.payload.id
         yield delay(300)
         yield put(deleteUserSuccess(userId))
+        toast.success(`User ${action.payload.name} deleted succesfully`)
     } catch (error) {
         yield put(deleteUserFailure("Failed to delete user"))
+        toast.error(`failed to delete user ${action.payload.name}`)
     }
 }
 
@@ -66,8 +73,10 @@ function* handleUpdateUser(action) {
         const updateUser = action.payload
         yield delay(300)
         yield put(updateUserSuccess(updateUser))
+        toast.success(`User ${action.payload.name} updated succesfully`)
     } catch (error) {
         yield put(updateUserFailure("Faile to update user"))
+        toast.error(`failed to update user ${action.payload.name}`)
     }
 }
 

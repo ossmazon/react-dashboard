@@ -67,15 +67,15 @@ body {
 }
 
 .add-user-btn {
-    background: transparent;
-    border: 1px solid var(--text-secondary);
-    color: var(--text-primary);
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-bottom: 20px;
+  background: transparent;
+  border: 1px solid var(--text-secondary);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .add-user-btn:hover {
-    border-color: var(--accent);
+  border-color: var(--accent);
 }
