@@ -25,10 +25,10 @@ function* onFetchUsers() {
 
         const saved = localStorage.getItem("users")
 
-        if (saved) {
+     /*    if (saved) {
             yield put(fetchUsersSuccess(JSON.parse(saved)))
             return
-        }
+        } */
 
         const response = yield call(getUsersApi)
         yield put(fetchUsersSuccess(response.data))
