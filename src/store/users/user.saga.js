@@ -16,7 +16,7 @@ import {
     updateUserSuccess,
     updateUserFailure
 } from "./user.slice"
-import { getUsersApi } from "./user.api";
+import { createUserApi, deleteUserApi, getUsersApi, updateUserApi } from "./user.api";
 import { v4 as uuidv4 } from "uuid"
 import { toast } from "react-toastify";
 
@@ -25,10 +25,10 @@ function* onFetchUsers() {
 
         const saved = localStorage.getItem("users")
 
-     /*    if (saved) {
-            yield put(fetchUsersSuccess(JSON.parse(saved)))
-            return
-        } */
+        /*    if (saved) {
+               yield put(fetchUsersSuccess(JSON.parse(saved)))
+               return
+           } */
 
         const response = yield call(getUsersApi)
         yield put(fetchUsersSuccess(response.data))
@@ -41,25 +41,19 @@ function* onFetchUsers() {
 
 function* handleCreateUser(action) {
     try {
-        yield delay(500)
-        const newId = uuidv4().slice(0, 5)
-
-        const newUser = {
-            id: newId,
-            ...action.payload
-        }
-        yield put(createUserSuccess(newUser))
+        const response = yield call(createUserApi, action.payload)
+        yield put(createUserSuccess(response.data))
         toast.success(`User ${action.payload.name} created successfully`)
     } catch (error) {
         yield put(createUserFailure("Failed to create user"))
-        toast.error("Failed to create user")
+        toast.error(`Failed to create user ${action.payload.name}`)
     }
 }
 
 function* handleDeleteUser(action) {
     try {
         const userId = action.payload.id
-        yield delay(300)
+        yield call(deleteUserApi, userId)
         yield put(deleteUserSuccess(userId))
         toast.success(`User ${action.payload.name} deleted succesfully`)
     } catch (error) {
@@ -70,9 +64,8 @@ function* handleDeleteUser(action) {
 
 function* handleUpdateUser(action) {
     try {
-        const updateUser = action.payload
-        yield delay(300)
-        yield put(updateUserSuccess(updateUser))
+        const response = yield call(updateUserApi, action.payload)
+        yield put(updateUserSuccess(response.data))
         toast.success(`User ${action.payload.name} updated succesfully`)
     } catch (error) {
         yield put(updateUserFailure("Faile to update user"))
