@@ -45,8 +45,8 @@ function* handleCreateUser(action) {
         yield put(createUserSuccess(response.data))
         toast.success(`User ${action.payload.name} created successfully`)
     } catch (error) {
-        yield put(createUserFailure("Failed to create user"))
-        toast.error(`Failed to create user ${action.payload.name}`)
+        yield put(createUserFailure(error.response.data))
+        toast.error(`Failed to create user${action.payload.name? " "+action.payload.name+", ":", "}` + Object.values(error.response.data).join(", "))
     }
 }
 
